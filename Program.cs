@@ -62,6 +62,30 @@ namespace Program
             m2 = new BitMatrix(1, 1, 1);
             Console.WriteLine(m1 == m2);
             Console.WriteLine(m1 != m2);
+
+
+            Console.WriteLine("\n\n");
+
+            // indekser - poprawne indeksy
+            m = new BitMatrix(3, 4);
+            m[0, 0] = 1;
+            Console.WriteLine(m[0, 0]);
+
+            m[2, 3] = 1;
+            Console.WriteLine(m[2, 3]);
+
+            m[1, 1] = 1;
+            Console.WriteLine(m[1, 1] + "\n\n");
+
+            // forach - poprawny porządek
+            m = new BitMatrix(2, 2);
+            m[0, 1] = 1;
+            m[1, 0] = 1;
+            var expected = "0110";
+            string s = "";
+            foreach (var x in m)
+                s += x;
+            Console.WriteLine(expected == s);
         }
        
     }

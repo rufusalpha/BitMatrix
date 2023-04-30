@@ -1,23 +1,43 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 // prostokątna macierz bitów o wymiarach m x n
 
 namespace BitMatrixSpace
 {
-    public partial class BitMatrix : IEquatable<BitMatrix>
+    public partial class BitMatrix : IEquatable<BitMatrix>, IEnumerable<int>
     {
         private BitArray data;
         public int NumberOfRows { get; }
         public int NumberOfColumns { get; }
         public bool IsReadOnly => false;
 
-        public bool this[int i, int j]
+        public int this[int i, int j]
         {
-            get => data[i * NumberOfColumns + j];
-            set => data[i * NumberOfColumns + j] = value;
+            get
+            {
+                if (i >= NumberOfRows || j >= NumberOfColumns || i<0 || j < 0)
+                    throw new IndexOutOfRangeException();
+
+                return BoolToBit( data[i * NumberOfRows + j] );
+            }
+            set
+            {
+                if (i >= NumberOfRows || j >= NumberOfColumns || i < 0 || j < 0)
+                    throw new IndexOutOfRangeException();
+
+                data[i * NumberOfRows + j] = BitToBool(value);
+            }
         }
+
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < NumberOfRows * NumberOfColumns; i++)
+                yield return BoolToBit(data[i]);
+        }
+        IEnumerator<int> IEnumerable<int>.GetEnumerator() => (IEnumerator<int>)GetEnumerator();
 
         // tworzy prostokątną macierz bitową wypełnioną `defaultValue`
         public BitMatrix(int numberOfRows, int numberOfColumns, int defaultValue = 0)
