@@ -27,11 +27,11 @@ namespace Program
             Console.WriteLine(m);
 
             // konstruktor BitMatrix(int[,])
-            //int[,] arr = new int[,] { { 1, 0, 1 }, { 0, 1, 1 } };
-            //m = new BitMatrix(arr);
-            //Console.WriteLine(arr.GetLength(0) == m.NumberOfRows);
-            //Console.WriteLine(arr.GetLength(1) == m.NumberOfColumns);
-            //Console.Write(m.ToString());
+            int[,] arr = new int[,] { { 1, 0, 1 }, { 0, 1, 1 } };
+            m = new BitMatrix(arr);
+            Console.WriteLine(arr.GetLength(0) == m.NumberOfRows);
+            Console.WriteLine(arr.GetLength(1) == m.NumberOfColumns);
+            Console.Write(m.ToString());
         }
        
     }
